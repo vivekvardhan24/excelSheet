@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./Components/NavBar.jsx";
+import AddRecord from "./Components/AddRecord.jsx";
+import Table from "./Components/DataTable";
+import { useState } from "react";
 
 function App() {
+  const [recordsStore, setRecordsStore] = useState([]);
+
+  // create
+  const addRecordToStore = ({ firstname, lastname, phoneNumber }) => {
+    const newRecord = {
+      firstname,
+      lastname,
+      phoneNumber,
+      id: recordsStore.length + 1,
+    };
+    return [...recordsStore, newRecord];
+  };
+  // update
+  // const updateRecordInStore = ({id, firstname, lastname, phoneNumber}) =>
+  //   recordsStore.map(record =>
+  //     record.id === updatedRecord.id ?
+  //       { id, firstname, lastname, phoneNumber }
+  //   )
+
+  // delete
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <AddRecord />
+      <Table />
     </div>
   );
 }
