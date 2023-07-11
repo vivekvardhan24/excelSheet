@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import data from "../Data/Data.js";
 
-function AddRecord() {
+function AddRecord({ addRecordToStore }) {
   const [showAddRecord, setShowAddRecord] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [contactNumber, setContactNumber] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [contact, setContact] = useState("");
 
   const handleAddRecordClick = () => {
     setShowAddRecord(!showAddRecord);
   };
 
   const handleFirstNameChange = event => {
-    setFirstName(event.target.value);
+    setFirstname(event.target.value);
   };
 
   const handleLastNameChange = event => {
-    setLastName(event.target.value);
+    setLastname(event.target.value);
   };
 
   const handleContactNumberChange = event => {
-    setContactNumber(event.target.value);
+    setContact(event.target.value);
   };
 
   const handleSubmit = event => {
@@ -28,20 +28,20 @@ function AddRecord() {
     // Do something with the form values (e.g., send them to a server)
     const newRecord = {
       id: "4",
-      fName: firstName,
-      lName: lastName,
-      contact: contactNumber,
+      firstname: firstname,
+      lastname: lastname,
+      contact: contact,
     };
     console.log(newRecord);
     data.records.push(newRecord);
     console.log(data.records);
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Contact Number:", contactNumber);
+    console.log("First Name:", firstname);
+    console.log("Last Name:", lastname);
+    console.log("Contact Number:", contact);
     // Clear the form fields
-    setFirstName("");
-    setLastName("");
-    setContactNumber("");
+    setFirstname("");
+    setLastname("");
+    setContact("");
     // Hide the form
     setShowAddRecord(false);
   };
@@ -57,7 +57,7 @@ function AddRecord() {
             First Name:
             <input
               type="text"
-              value={firstName}
+              value={firstname}
               onChange={handleFirstNameChange}
             />
           </label>
@@ -66,7 +66,7 @@ function AddRecord() {
             Last Name:
             <input
               type="text"
-              value={lastName}
+              value={lastname}
               onChange={handleLastNameChange}
             />
           </label>
@@ -75,12 +75,17 @@ function AddRecord() {
             Contact Number:
             <input
               type="text"
-              value={contactNumber}
+              value={contact}
               onChange={handleContactNumberChange}
             />
           </label>
           <br />
-          <button type="submit">Submit</button>
+          <button
+           type="submit"
+           onClick={() => addRecordToStore({ firstname, lastname, contact })}
+           >
+            Submit
+          </button>
         </form>
       )}
     </div>

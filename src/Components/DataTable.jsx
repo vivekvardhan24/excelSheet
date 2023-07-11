@@ -9,12 +9,12 @@ import recordData from "../Data/Data.js"
 const columns = [
     {
         name: 'First Name',
-        selector: row => row.fName,
+        selector: row => row.firstname,
         sortable: true,
     },
     {
         name: 'Last Name',
-        selector: row => row.lName,
+        selector: row => row.lastname,
         sortable: true,
     },
     {
@@ -37,12 +37,12 @@ const columns = [
 
 
 
-function Table(){
+function Table({ recordsStore }){
     
     return (<DataTable
         columns={columns}
         // data={contactData["records"]}
-        data={recordData["records"]}
+        data={recordsStore}
         pagination
     />);
 };

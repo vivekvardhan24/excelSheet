@@ -4,33 +4,53 @@ import AddRecord from "./Components/AddRecord.jsx";
 import Table from "./Components/DataTable";
 import { useState } from "react";
 
-function App() {
-  const [recordsStore, setRecordsStore] = useState([]);
 
-  // create
-  const addRecordToStore = ({ firstname, lastname, phoneNumber }) => {
+function App() {
+
+  const [recordsStore, setRecordsStore] = useState([
+    {
+      "id": 1,
+      "firstname": 'Vivek',
+      "lastname": 'Vardhan',
+      "contact": '24'
+    },
+    {
+      "id": 2,
+      "firstname": 'Leo',
+      "lastname": 'Messi',
+      "contact": '10'
+    },
+    {
+      "id": 3,
+      "firstname": 'Cristiano',
+      "lastname": 'Ronaldo',
+      "contact": '07'
+    }
+  ]);
+
+  const addRecordToStore = ({ firstname, lastname, contact }) => {
     const newRecord = {
       firstname,
       lastname,
-      phoneNumber,
+      contact,
       id: recordsStore.length + 1,
     };
-    return [...recordsStore, newRecord];
+    setRecordsStore([...recordsStore, newRecord]);
   };
-  // update
-  // const updateRecordInStore = ({id, firstname, lastname, phoneNumber}) =>
-  //   recordsStore.map(record =>
-  //     record.id === updatedRecord.id ?
-  //       { id, firstname, lastname, phoneNumber }
-  //   )
 
-  // delete
+  const updateRecordInStore = updatedRecord => {
+    return recordsStore.map((record) =>
+      record.id === updatedRecord.id ? updatedRecord : record
+    );
+  };
+
+  // delete record from store
 
   return (
     <div>
       <Header />
-      <AddRecord />
-      <Table />
+      <AddRecord addRecordToStore={addRecordToStore}/>
+      <Table recordsStore={recordsStore} />
     </div>
   );
 }
